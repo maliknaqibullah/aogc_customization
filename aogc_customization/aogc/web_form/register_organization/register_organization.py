@@ -11,6 +11,7 @@ from frappe.utils import random_string
 def create_user_and_supplier():
     user = frappe.get_doc({
         'doctype': 'User',
+        
         'email': "myemail@email.com",
         'first_name': "from code",
         'send_welcome_email': 0,
