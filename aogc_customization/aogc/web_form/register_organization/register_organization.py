@@ -9,22 +9,20 @@ import frappe
 from frappe.utils import random_string
 @frappe.whitelist(allow_guest=True)
 def create_user_and_supplier():
-    user = frappe.get_doc({
-        'doctype': 'User',
-        
-        'email': "myemail@email.com",
-        'first_name': "from code",
-        'send_welcome_email': 0,
-        'enabled': 0,
-        'user_type': 'System User'
-    })
+    pass
+    # user = frappe.get_doc({
+    #     'doctype': 'User',
+    #     'email': "myemail@email.com",
+    #     'first_name': "from code"
+    # })
     
-    # Set password for the user
-    user.new_password = random_string(10)
-    user.save(ignore_permissions=True)
-    user.submit()
-    user.db.commit()
-    return user
+    # # Set password for the user
+    # # user.new_password = random_string(10)
+    # user.save(ignore_permissions=True)
+    # user.add_roles("Supplier")
+    # user.submit()
+    # frappe.db.commit()
+    # return user
     # Create Supplier
     # supplier = frappe.get_doc({
     #     'doctype': 'Supplier',

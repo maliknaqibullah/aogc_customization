@@ -4,6 +4,14 @@ frappe.ready(function () {
 
         var organization_name = frappe.web_form.get_value('organization_name');
         var organization_type = frappe.web_form.get_value('organization_type');
+        var tender_service_type = frappe.web_form.get_value('tender_service_type');
+        var country = frappe.web_form.get_value('country');
+        var organization_address = frappe.web_form.get_value('organization_address');
+        var establish_date = frappe.web_form.get_value('establish_date');
+        var organization_phone = frappe.web_form.get_value('organization_phone');
+        var organization_type = frappe.web_form.get_value('organization_type');
+        var organization_name = frappe.web_form.get_value('organization_name');
+        var organization_type = frappe.web_form.get_value('organization_type');
 
         frappe.call({
             type: "POST",

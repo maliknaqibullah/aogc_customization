@@ -1,0 +1,227 @@
+{
+ "actions": [],
+ "allow_events_in_timeline": 1,
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:organization_name",
+ "creation": "2024-07-03 15:57:20.865206",
+ "default_view": "List",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "organization_profile_section",
+  "organization_name",
+  "tender_service_type",
+  "organization_address",
+  "organization_phone",
+  "owner_name",
+  "owner_phone",
+  "column_break_avig",
+  "organization_type",
+  "country",
+  "establish_date",
+  "logo",
+  "deputy_name",
+  "deputy_phone",
+  "license_details_section",
+  "license_number",
+  "license_issue_date",
+  "tin_number",
+  "tax_clearance_date",
+  "column_break_rqrb",
+  "license_document",
+  "license_expiry_date",
+  "tin_document",
+  "complete_registration_section",
+  "official_email",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "organization_profile_section",
+   "fieldtype": "Section Break",
+   "label": "Organization Profile"
+  },
+  {
+   "fieldname": "organization_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Organization Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "tender_service_type",
+   "fieldtype": "Link",
+   "label": "Supplier Type",
+   "options": "Supplier Group"
+  },
+  {
+   "fieldname": "organization_address",
+   "fieldtype": "Data",
+   "label": "Organization Address"
+  },
+  {
+   "fieldname": "organization_phone",
+   "fieldtype": "Phone",
+   "label": "Organization Phone "
+  },
+  {
+   "depends_on": "eval:doc.organization_type== \"Non-Governmental\";",
+   "fieldname": "owner_name",
+   "fieldtype": "Data",
+   "label": "Owner Name",
+   "mandatory_depends_on": "eval:doc.organization_type== \"Non-Governmental\";"
+  },
+  {
+   "depends_on": "eval:doc.organization_type== \"Non-Governmental\";",
+   "fieldname": "owner_phone",
+   "fieldtype": "Data",
+   "label": "Owner Phone",
+   "mandatory_depends_on": "eval:doc.organization_type== \"Non-Governmental\";"
+  },
+  {
+   "fieldname": "column_break_avig",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "organization_type",
+   "fieldtype": "Select",
+   "label": "Organization Type",
+   "options": "Governmental\nNon-Governmental"
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Country"
+  },
+  {
+   "fieldname": "establish_date",
+   "fieldtype": "Date",
+   "label": "Establish Date"
+  },
+  {
+   "fieldname": "logo",
+   "fieldtype": "Attach Image",
+   "label": "Logo"
+  },
+  {
+   "depends_on": "eval:doc.organization_type== \"Non-Governmental\";",
+   "fieldname": "deputy_name",
+   "fieldtype": "Data",
+   "label": "Deputy Name",
+   "mandatory_depends_on": "eval:doc.organization_type== \"Non-Governmental\";"
+  },
+  {
+   "depends_on": "eval:doc.organization_type== \"Non-Governmental\";",
+   "fieldname": "deputy_phone",
+   "fieldtype": "Data",
+   "label": "Deputy Phone",
+   "mandatory_depends_on": "eval:doc.organization_type== \"Non-Governmental\";"
+  },
+  {
+   "fieldname": "license_details_section",
+   "fieldtype": "Section Break",
+   "label": "License Details"
+  },
+  {
+   "fieldname": "license_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "License Number",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "license_issue_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "License Issue Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tin_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "TIN Number",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "tax_clearance_date",
+   "fieldtype": "Date",
+   "label": "Tax Clearance Date"
+  },
+  {
+   "fieldname": "column_break_rqrb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "license_document",
+   "fieldtype": "Attach",
+   "label": "License Document",
+   "reqd": 1
+  },
+  {
+   "fieldname": "license_expiry_date",
+   "fieldtype": "Date",
+   "label": "License Expiry Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tin_document",
+   "fieldtype": "Attach",
+   "label": "TIN Document",
+   "reqd": 1
+  },
+  {
+   "fieldname": "complete_registration_section",
+   "fieldtype": "Section Break",
+   "label": "Complete Registration"
+  },
+  {
+   "fieldname": "official_email",
+   "fieldtype": "Data",
+   "label": "Official Email",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Company Registration",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-07-15 09:36:42.287399",
+ "modified_by": "Administrator",
+ "module": "AOGC",
+ "name": "Company Registration",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "queue_in_background": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
