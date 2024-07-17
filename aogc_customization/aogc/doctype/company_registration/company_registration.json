@@ -9,18 +9,23 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "rejection_section",
+  "rejection_reason",
+  "column_break_axwc",
+  "additional_rejection_notes",
   "organization_profile_section",
-  "organization_name",
-  "tender_service_type",
-  "organization_address",
-  "organization_phone",
+  "organization_type",
+  "establish_date",
+  "logo",
+  "city",
   "owner_name",
   "owner_phone",
   "column_break_avig",
-  "organization_type",
+  "organization_name",
+  "tender_service_type",
+  "organization_phone",
   "country",
-  "establish_date",
-  "logo",
+  "organization_address",
   "deputy_name",
   "deputy_phone",
   "license_details_section",
@@ -32,8 +37,10 @@
   "license_document",
   "license_expiry_date",
   "tin_document",
+  "license_type",
   "complete_registration_section",
   "official_email",
+  "column_break_xkxz",
   "amended_from"
  ],
  "fields": [
@@ -63,7 +70,7 @@
   },
   {
    "fieldname": "organization_phone",
-   "fieldtype": "Phone",
+   "fieldtype": "Data",
    "label": "Organization Phone "
   },
   {
@@ -88,7 +95,7 @@
    "fieldname": "organization_type",
    "fieldtype": "Select",
    "label": "Organization Type",
-   "options": "Governmental\nNon-Governmental"
+   "options": "Company\nIndividual\nProprietorship\nPartnership\nGovernment"
   },
   {
    "fieldname": "country",
@@ -160,8 +167,7 @@
   {
    "fieldname": "license_document",
    "fieldtype": "Attach",
-   "label": "License Document",
-   "reqd": 1
+   "label": "License Document"
   },
   {
    "fieldname": "license_expiry_date",
@@ -172,13 +178,11 @@
   {
    "fieldname": "tin_document",
    "fieldtype": "Attach",
-   "label": "TIN Document",
-   "reqd": 1
+   "label": "TIN Document"
   },
   {
    "fieldname": "complete_registration_section",
-   "fieldtype": "Section Break",
-   "label": "Complete Registration"
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "official_email",
@@ -195,11 +199,49 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "rejection_reason",
+   "fieldtype": "Small Text",
+   "label": "Rejection Reason",
+   "read_only": 1
+  },
+  {
+   "fieldname": "additional_rejection_notes",
+   "fieldtype": "Small Text",
+   "label": "Additional Rejection Notes",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_xkxz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_axwc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "rejection_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "license_type",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "License Type",
+   "options": "Commercial\nNon Commercial"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-07-15 09:36:42.287399",
+ "modified": "2024-07-15 15:27:38.866701",
  "modified_by": "Administrator",
  "module": "AOGC",
  "name": "Company Registration",

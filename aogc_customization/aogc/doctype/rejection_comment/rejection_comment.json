@@ -1,0 +1,68 @@
+{
+ "actions": [],
+ "autoname": "field:english_comment",
+ "creation": "2024-07-15 09:53:10.660902",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "english_comment",
+  "column_break_nwap",
+  "pashto_comment",
+  "column_break_acqd",
+  "dari_comment"
+ ],
+ "fields": [
+  {
+   "columns": 10,
+   "fieldname": "english_comment",
+   "fieldtype": "Data",
+   "label": "English Comment",
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_nwap",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pashto_comment",
+   "fieldtype": "Data",
+   "label": "Pashto Comment"
+  },
+  {
+   "fieldname": "column_break_acqd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "dari_comment",
+   "fieldtype": "Data",
+   "label": "Dari Comment"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-07-15 10:04:05.470179",
+ "modified_by": "Administrator",
+ "module": "AOGC",
+ "name": "Rejection Comment",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
