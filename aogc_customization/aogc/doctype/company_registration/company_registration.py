@@ -151,3 +151,29 @@ def create_supplier_user(supplier_name, email):
         error_message = f"Error creating supplier user: {str(e)}"
         frappe.log_error(error_message[:140], "Create Supplier User")
         raise  # Re-raise the exception to propagate it further
+
+
+@frappe.whitelist()
+def send_rejection_email(company_registration_name, rejection_reason, additional_notes):
+    company_registration = frappe.get_doc("Company Registration", company_registration_name)
+    if company_registration:
+        # Construct email content
+        subject = f"Registration Rejected: {company_registration.organization_name}"
+        message = f"Dear {company_registration.organization_name},<br><br>\n\nWe regret to inform you that your registration with Afghanistan Oil and Gas Corporation(AOGC) has been rejected for the following reason:<br><br>\n\n{rejection_reason}<br><br> \n\nAdditional Notes: {additional_notes}<br><br> \n\nRegards,<br>\nAfghanistan Oil and Gas Corporation "
+
+        # Send email
+        frappe.sendmail(
+            recipients=company_registration.official_email,
+            subject=subject,
+            message=message,
+            now=True
+        )
+        return True
+    else:
+        return False
+    
+@frappe.whitelist()
+def fetch_comment(code):
+    
+    comment = frappe.get_doc('Rejection Comment', code)
+    return comment

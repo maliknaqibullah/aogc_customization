@@ -1,14 +1,11 @@
 // Copyright (c) 2024, AOGC and contributors
 // For license information, please see license.txt
 
+
 frappe.ui.form.on("Company Registration", {
 
     refresh(frm) {
-
-
         frm.trigger('addActionButtons')
-
-
         frm.toggle_enable([
             "organization_profile_section",
             "organization_name",
@@ -45,15 +42,14 @@ frappe.ui.form.on("Company Registration", {
             $('div[data-fieldname="rejection_section"]').find('*').css("color", "red");
 
         }
-        
+
         if (frm.doc.workflow_state != "Draft") {
             $('.actions-btn-group').hide();
 
         }
     },
     addActionButtons: function (frm) {
-        if ((frappe.user_roles.includes("System Manager")) && (frm.doc.workflow_state == "Approval pending by manager")) {
-
+        if (frappe.user_roles.includes("System Manager") && frm.doc.workflow_state === "Pending" && !frm.doc.__unsaved) {
 
             frm.add_custom_button(__('Reject Organization'), function () {
 
@@ -98,6 +94,7 @@ frappe.ui.form.on("Company Registration", {
                                             frm.set_value("workflow_state", "Rejected")
                                             frm.refresh_field("workflow_state");
                                             frm.save()
+                                            sendRejectionEmail(frm.doc.name, comments, values.additional_notes);
                                         }
                                     })
                                 }, () => {
@@ -116,22 +113,30 @@ frappe.ui.form.on("Company Registration", {
                 frappe.confirm('Are you sure you want to Approve?',
                     () => {
                         // action to perform if Yes is selected
-                        if (frm.doc.workflow_state == "Approval pending by manager") {
+                        if (frm.doc.workflow_state == "Pending") {
                             // Set the values for rejection tab
+                            frappe.msgprint({
+                                title: __(`Processing...<div class="spinner-grow spinner-grow-sm" role="status">
+								<span class="sr-only">Loading...</span>
+							  </div>`),
+                                message: `Please wait while we process your request...`,
+                                clear: true
+                            });
                             frappe.call({
                                 method: "aogc_customization.aogc.doctype.company_registration.company_registration.approve_organization",
                                 args: {
                                     data: frm.doc
                                 },
                                 callback: function (response) {
-                                    console.log(response);
                                     // let res = JSON.parse(response);
-                                    // if (response.message == 'success') {
-                                    //     frm.set_value("workflow_state", "Approved")
-                                    //     frm.refresh_field("workflow_state");
-                                    //     frm.save("Submit")
-                                    //     frm.refresh()
-                                    // }
+                                    if (response.message == 'success') {
+                                        frappe.hide_msgprint();
+
+                                        frm.set_value("workflow_state", "Approved")
+                                        frm.refresh_field("workflow_state");
+                                        frm.save("Submit")
+                                        frm.refresh()
+                                    }
                                 }
                             });
 
@@ -139,28 +144,28 @@ frappe.ui.form.on("Company Registration", {
                     }, () => {
                         // action to perform if No is selected
                     })
-            },).removeClass('btn-default').addClass("btn btn-success");
+            },).removeClass('btn-default').addClass("btn btn-primary");
         }
 
-        if (frm.doc.workflow_state == "Approval pending by manager") {
-
-        frm.add_custom_button(__('Submit Organization'), function () {
-            // Dialogue 
-            frappe.confirm('Are you sure you want to Submit?',
-                () => {
-                    // action to perform if Yes is selected
-                    if (frm.doc.workflow_state == "Draft") {
-                        // Set the values for rejection tab
-                             frm.set_value("workflow_state", "Approval pending by manager")
-                            frm.refresh_field("workflow_state");
-                            frm.save()
-                            frm.refresh()
-
-                    }
-                }, () => {
-                    // action to perform if No is selected
-                })
-        },).removeClass('btn-default').addClass("btn btn-success");
-    }
     },
 });
+
+
+function sendRejectionEmail(companyRegistrationName, rejectionReason, additionalNotes) {
+    frappe.call({
+        method: "aogc_customization.aogc.doctype.company_registration.company_registration.send_rejection_email",
+        args: {
+            company_registration_name: companyRegistrationName,
+            rejection_reason: rejectionReason,
+            additional_notes: additionalNotes
+        },
+        callback: function (response) {
+            console.log(response);
+            if (response.message) {
+                frappe.msgprint(__("Rejection email sent successfully."));
+            } else {
+                frappe.msgprint(__("Failed to send rejection email."));
+            }
+        }
+    });
+}
